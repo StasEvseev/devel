@@ -70,6 +70,7 @@ import raid.eccmap
 from six.moves import range
 from io import open
 
+
 #------------------------------------------------------------------------------
 
 _ECCMAP = {}
@@ -262,7 +263,9 @@ def main():
     block_number = sys.argv[4]
     data_parity_dir = sys.argv[5]
 
-
+    print("raidread is starting with")
+    print(OutputFileName)
+    print(eccmapname)
     raidread(OutputFileName, eccmapname, version, block_number, data_parity_dir)
 
 
