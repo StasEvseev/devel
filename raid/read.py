@@ -61,6 +61,10 @@ import sys
 import struct
 
 #------------------------------------------------------------------------------
+if __name__ == '__main__':
+    dirpath = os.path.dirname(os.path.abspath(sys.argv[0]))
+    sys.path.insert(0, os.path.abspath(os.path.join(dirpath, '..')))
+    sys.path.insert(0, os.path.abspath(os.path.join(dirpath, '..', '..')))
 
 import raid.eccmap
 from six.moves import range
@@ -250,16 +254,16 @@ def raidread(
 
 def main():
     if (len(sys.argv) < 3):
-        print("raidread needs an output filename and eccmap name")
         sys.exit(2)
 
     OutputFileName = sys.argv[1]
     eccmapname = sys.argv[2]
+    version = sys.argv[3]
+    block_number = sys.argv[4]
+    data_parity_dir = sys.argv[5]
 
-    print("raidread is starting with")
-    print(OutputFileName)
-    print(eccmapname)
-    raidread(OutputFileName, eccmapname)
+
+    raidread(OutputFileName, eccmapname, version, block_number, data_parity_dir)
 
 
 if __name__ == "__main__":
