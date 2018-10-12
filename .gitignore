@@ -25,3 +25,6 @@ dist/
 
 # IDE specific
 .idea
+
+.DS_Store
+build/

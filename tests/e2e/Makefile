@@ -2,6 +2,9 @@ BUILD=.build
 RUN_TEST_1=.run_test_1
 RUN_TEST_2=.run_test_2
 
+tests_array=tests/test_role_customer \
+	tests/test_role_proxy_router
+
 .PHONY: test
 
 clean: clean_1 clean_2
@@ -9,7 +12,16 @@ clean: clean_1 clean_2
 clean_build:
 	@rm -f $(BUILD)
 
+$(tests_array): %: ; $(MAKE) NAMESPACE=$* job
+
+job:
+	$(MAKE) _run
+	$(MAKE) COMMAND="pytest $(NAMESPACE) -v -s" _test
+	$(MAKE) _clean
+
 test: clean_build clean $(BUILD) $(RUN_TEST_1) $(RUN_TEST_2) test_1 test_2
+
+test_iter: clean_build clean $(BUILD) $(tests_array)
 
 $(BUILD):
 	docker-compose build
