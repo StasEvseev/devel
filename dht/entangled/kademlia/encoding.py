@@ -1,11 +1,4 @@
 #!/usr/bin/env python
-# encoding.py
-#
-# Copyright (C) 2007-2008 Francois Aucamp, Meraka Institute, CSIR
-# See AUTHORS for all authors and contact information. 
-# 
-# License: GNU Lesser General Public License, version 3 or later; see COPYING
-#          included in this archive for details.
 #
 # This library is free software, distributed under the terms of
 # the GNU Lesser General Public License Version 3, or any later version.
@@ -14,11 +7,11 @@
 # The docstrings in this module contain epytext markup; API documentation
 # may be created by processing this file with epydoc: http://epydoc.sf.net
 
-
 from __future__ import absolute_import
 from __future__ import unicode_literals
 import six
 import codecs
+
 
 
 def encode_hex(value):
@@ -31,45 +24,43 @@ def decode_hex(value):
     return codecs.decode(value, 'hex')
 
 
+class DecodeError(Exception):
+    """ Should be raised by an C{Encoding} implementation if decode operation
+    fails
+    """
+
 class Encoding(object):
+    """ Interface for RPC message encoders/decoders
+    
+    All encoding implementations used with this library should inherit and
+    implement this.
     """
-    Interface for RPC message encoders/decoders.
-
-    All encoding implementations used with this library should inherit
-    and implement this.
-    """
-
     def encode(self, data):
-        """
-        Encode the specified data.
-
+        """ Encode the specified data
+        
         @param data: The data to encode
                      This method has to support encoding of the following
                      types: C{str}, C{int} and C{long}
                      Any additional data types may be supported as long as the
                      implementing class's C{decode()} method can successfully
                      decode them.
-
+        
         @return: The encoded data
         @rtype: str
         """
-
     def decode(self, data):
-        """
-        Decode the specified data string.
-
+        """ Decode the specified data string
+        
         @param data: The data (byte string) to decode.
         @type data: str
-
+        
         @return: The decoded data (in its correct type)
         """
 
-
 class Bencode(Encoding):
-    """
-    Implementation of a Bencode-based algorithm (Bencode is the encoding
+    """ Implementation of a Bencode-based algorithm (Bencode is the encoding
     algorithm used by Bittorrent).
-
+    
     @note: This algorithm differs from the "official" Bencode algorithm in
            that it can encode/decode floating point values in addition to
            integers.
@@ -172,3 +163,5 @@ class Bencode(Encoding):
         except:
             import traceback
             traceback.print_exc()
+
+

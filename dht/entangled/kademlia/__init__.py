@@ -1,22 +1,8 @@
-#!/usr/bin/env python
-#__init__.py
-#
-#
-# Copyright (C) 2007-2008 Francois Aucamp, Meraka Institute, CSIR
-# See AUTHORS for all authors and contact information. 
-# 
-# License: GNU Lesser General Public License, version 3 or later; see COPYING
-#          included in this archive for details.
-#
 # This library is free software, distributed under the terms of
 # the GNU Lesser General Public License Version 3, or any later version.
 # See the COPYING file included in this archive
-#
-# The docstrings in this module contain epytext markup; API documentation
-# may be created by processing this file with epydoc: http://epydoc.sf.net
 
-"""
-Kademlia DHT implementation.
+""" Kademlia DHT implementation
 
 This package contains Entangled's implementation of the Kademlia
 distributed hash table (DHT).
@@ -37,9 +23,8 @@ with a TCP-based protocol, instead of the provided UDP-based one.
 
 Client applications should also modify the values found in
 C{entangled.kademlia.constants} to suit their needs. Refer to the C{constants}
-module for documentation on what these values control.
+module for documentation on what these values control. 
 """
 
-from __future__ import absolute_import
-from .node import Node
-from .datastore import DictDataStore, SQLiteDataStore
+from node import Node
+from datastore import DictDataStore, SQLiteDataStore
